@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DMC Restaurant Menu</title>
+    <link href="dist/output.css" rel="stylesheet" />
+    <style>
+      .tab {
+        transition: opacity 0.3s ease;
+      }
+      .hidden {
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+      .loading {
+        opacity: 0.7;
+      }
+      .loaded {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+    </style>
+  </head>
+  <body class="bg-orange-500 dark:bg-gray-900 text-white min-h-screen">
+    <header class="text-center py-8">
+      <h1 class="text-4xl font-bold">DMC RESTAURANT</h1>
+      <p class="text-lg mt-2">Fine Dining & Drinks</p>
+    </header>
+
+    <nav class="flex justify-center gap-4 mb-6">
+      <button
+        onclick="showTab('food')"
+        class="px-6 py-3 bg-white text-black rounded-lg hover:bg-gray-100 transition font-semibold"
+      >
+        Food Menu
+      </button>
+      <button
+        onclick="showTab('drinks')"
+        class="px-6 py-3 bg-white text-black rounded-lg hover:bg-gray-100 transition font-semibold"
+      >
+        Drinks Menu
+      </button>
+    </nav>
+
+    <div class="relative w-full max-w-4xl mx-auto px-4">
+      <div id="food" class="tab">
+        <img
+          src="assets\food-menu.jpg"
+          loading="lazy"
+          class="w-full rounded-xl shadow-lg loading border-4 border-white"
+          onload="this.classList.add('loaded')"
+          alt="DMC Restaurant Food Menu - Appetizers, Main Courses, and Desserts"
+        />
+      </div>
+
+      <div id="drinks" class="tab hidden">
+        <img
+          src="assets\drinks-menu.jpg"
+          loading="lazy"
+          class="w-full rounded-xl shadow-lg loading border-4 border-white"
+          onload="this.classList.add('loaded')"
+          alt="DMC Restaurant Drinks Menu - Cocktails, Wines, and Beverages"
+        />
+      </div>
+    </div>
+
+    <footer class="text-center py-8 mt-8 text-orange-200">
+      <p>© 2026 DMC Restaurant. All rights reserved.</p>
+    </footer>
+
+    <script>
+      function showTab(id) {
+        document
+          .querySelectorAll(".tab")
+          .forEach((t) => t.classList.add("hidden"));
+        document.getElementById(id).classList.remove("hidden");
+      }
+
+      // Preload images for better performance
+      window.addEventListener("load", function () {
+        const images = ["assets/food-menu.jpg", "assets/drinks-menu.jpg"];
+        images.forEach((src) => {
+          const img = new Image();
+          img.src = src;
+        });
+      });
+
+      // Default to food tab
+      document.addEventListener("DOMContentLoaded", function () {
+        showTab("food");
+      });
+    </script>
+  </body>
+</html>
